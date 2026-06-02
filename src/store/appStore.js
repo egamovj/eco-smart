@@ -186,6 +186,40 @@ export const useAppStore = create(
         
         return true;
       },
+      addLocation(loc) {
+        const newLoc = {
+          id: `l${Date.now()}`,
+          checkedIn: false,
+          ...loc,
+          lat: parseFloat(loc.lat),
+          lng: parseFloat(loc.lng),
+          reward: parseInt(loc.reward) || 20,
+        };
+        set(s => ({ mapLocations: [...s.mapLocations, newLoc] }));
+        return true;
+      },
+      updateLocation(updated) {
+        set(s => ({
+          mapLocations: s.mapLocations.map(l => 
+            l.id === updated.id 
+              ? { 
+                  ...l, 
+                  ...updated, 
+                  lat: parseFloat(updated.lat), 
+                  lng: parseFloat(updated.lng), 
+                  reward: parseInt(updated.reward) || 20 
+                } 
+              : l
+          )
+        }));
+        return true;
+      },
+      deleteLocation(id) {
+        set(s => ({
+          mapLocations: s.mapLocations.filter(l => l.id !== id)
+        }));
+        return true;
+      },
     }),
     {
       name: 'biocycle-store-v4',

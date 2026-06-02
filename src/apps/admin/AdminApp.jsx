@@ -6,8 +6,9 @@ import Users from './pages/Users';
 import Orders from './pages/Orders';
 import Pricing from './pages/Pricing';
 import Analytics from './pages/Analytics';
+import MapPoints from './pages/MapPoints';
 import AccessibilityWidget from '../user/pages/AccessibilityWidget';
-import { LayoutDashboard, Users as UsersIcon, ClipboardList, Tag, BarChart3, LogOut, Leaf } from 'lucide-react';
+import { LayoutDashboard, Users as UsersIcon, ClipboardList, Tag, BarChart3, LogOut, Leaf, MapPin } from 'lucide-react';
 import { useEffect } from 'react';
 
 
@@ -17,6 +18,7 @@ const NAV_ITEMS = [
   { path: '/admin/orders',    icon: ClipboardList,   label: 'Topshirishlar' },
   { path: '/admin/pricing',   icon: Tag,             label: 'Narxlar' },
   { path: '/admin/analytics', icon: BarChart3,       label: 'Tahlil' },
+  { path: '/admin/mappoints', icon: MapPin,          label: 'Punktlar xaritasi' },
 ];
 
 function Sidebar() {
@@ -100,6 +102,7 @@ export default function AdminApp() {
           <Route path="orders"      element={<Orders />} />
           <Route path="pricing"     element={<Pricing />} />
           <Route path="analytics"   element={<Analytics />} />
+          <Route path="mappoints"   element={<MapPoints />} />
           <Route path="*"           element={<Navigate to="/admin/dashboard" replace />} />
         </Routes>
       </main>
