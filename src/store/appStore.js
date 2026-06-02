@@ -57,7 +57,8 @@ export const useAppStore = create(
 
 
       loginAdmin(password) {
-        if (password === 'admin123') { set({ isAdminLoggedIn: true }); return true; }
+        const trimmed = (password || '').trim();
+        if (trimmed === 'admin123') { set({ isAdminLoggedIn: true }); return true; }
         return false;
       },
       logoutAdmin() { set({ isAdminLoggedIn: false }); },
@@ -187,10 +188,9 @@ export const useAppStore = create(
       },
     }),
     {
-      name: 'biocycle-store-v3',
+      name: 'biocycle-store-v4',
       partialize: (s) => ({
         currentUser: s.currentUser,
-        isAdminLoggedIn: s.isAdminLoggedIn,
         users: s.users,
         orders: s.orders,
         transactions: s.transactions,
@@ -200,6 +200,10 @@ export const useAppStore = create(
         bonusMultiplier: s.bonusMultiplier,
         theme: s.theme,
         accessibility: s.accessibility,
+      }),
+      merge: (persistedState, currentState) => ({
+        ...currentState,
+        ...(persistedState || {}),
       }),
     }
   )
